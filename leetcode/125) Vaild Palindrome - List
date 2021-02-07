@@ -1,0 +1,15 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        refined_s = [] #declare refined_s 
+        for char in s: #s is examples' sentences excepted 
+            if char.isalnum():
+                refined_s.append(char.lower())
+
+        while len(refined_s) > 1:
+            if refined_s[0] != refined_s.pop():
+                return False
+            else:
+                del refined_s[0]
+        return True
+
+#Runtime : 300ms, Memory : 19.3MB
