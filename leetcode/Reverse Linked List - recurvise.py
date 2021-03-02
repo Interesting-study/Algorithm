@@ -1,0 +1,17 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        def reverse(node: ListNode, prev: ListNode = None):
+            if not node:
+                return prev
+        
+            next, node.next = node.next, prev
+            return reverse(next, node)
+        return reverse(head)
+    
+#Runtime : 32ms, Memory : 20.3MB
+#https://leetcode.com/problems/reverse-linked-list/
