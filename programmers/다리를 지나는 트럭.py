@@ -2,6 +2,7 @@ from collections import deque
 def solution(bridge_length, weight, truck_weights):
     truck_weights = deque(truck_weights)
     pass_bridge = deque([])
+    answer = 0
     times = 0
 
     while len(truck_weights):
@@ -19,4 +20,6 @@ def solution(bridge_length, weight, truck_weights):
             times += 1
             if times >= bridge_length:
                 pass_bridge.popleft()
-        print(pass_bridge, times)
+            print(pass_bridge, bridge_length, times, answer)
+        answer += times
+        times = 0
