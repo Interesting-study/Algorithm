@@ -13,6 +13,8 @@ def solution(new_id):
     while '..' in recom_id:
         recom_id = recom_id.replace('..', '.')
         
+    #계속 while loop로 돌리게 되면 나중에는 .밖에 남지 않는다
+        
     #3단계
     if recom_id[0] == '.' and len(recom_id) > 1:
         recom_id = recom_id[1:]
