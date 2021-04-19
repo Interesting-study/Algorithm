@@ -1,25 +1,24 @@
-from collections import deque
-def solution(bridge_length, weight, truck_weights):
-    truck_weights = deque(truck_weights)
-    pass_bridge = deque([])
+def solution(bridge_length,weight,truck_weights):
     answer = 0
-    times = 0
+    bridge_on = [0]* bridge_length
+    curr_weight = 0
+    
+    while truck_weights:
+        answer+=1
+        bridge_out = bridge_on.pop(0)
+        curr_weight -= bridge_out
 
-    while len(truck_weights):
-        while len(truck_weights):
-            pass_bridge.append(truck_weights.popleft())
-            if sum(pass_bridge) >= weight:
-                break
-    
-        if sum(pass_bridge) > weight or len(pass_bridge) > 2:
-            truck_weights.appendleft(pass_bridge.pop())
-        print(pass_bridge, times)
-        #다리를 건널 트럭을 골라냄, pass_bridge의 sum이 weight 보다 작거나 같아야 함    
-    
-        while len(pass_bridge):
-            times += 1
-            if times >= bridge_length:
-                pass_bridge.popleft()
-            print(pass_bridge, bridge_length, times, answer)
-        answer += times
-        times = 0
+        if curr_weight + truck_weights[0] > weight:
+            bridge_on.append(0)
+        else:
+            truck = truck_weights.pop(0)
+            bridge_on.append(truck)
+            curr_weight += truck
+
+
+    while curr_weight>0:
+        answer +=1
+        bridge_out = bridge_on.pop(0)
+        curr_weight -=bridge_out
+
+    return answer
