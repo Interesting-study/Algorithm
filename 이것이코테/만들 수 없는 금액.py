@@ -16,3 +16,5 @@ for num in range(2, length):
         vaild_value.add(sum(comb))
 
 print(min(predict_value - vaild_value))
+
+#시간 : 2.574920654296875e-05 secs
