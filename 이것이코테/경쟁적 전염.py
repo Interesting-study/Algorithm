@@ -36,5 +36,4 @@ while q:
                  tube[nx][ny] = prio
                  q.append((prio, sec + 1, nx, ny))
 
-print(tube)
 print(tube[find_x-1][find_y-1])
