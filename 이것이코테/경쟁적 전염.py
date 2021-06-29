@@ -18,6 +18,7 @@ seconds, find_x, find_y = map(int, input().split())
 dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
 
+#바이러스가 동시에 움직여야 하므로
 q = deque(virus)
 
 while q:
