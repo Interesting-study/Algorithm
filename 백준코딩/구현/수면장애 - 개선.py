@@ -13,7 +13,8 @@ def find_first_index(n):
         sum_index = sum(first_index[:square - 1])
     else:
         sum_index = first_index[0]
-    return sum_index, square, (10 ** (square -1)) - 1
+
+    return sum_index, square, (10 ** (square - 1)) - 1
 
 n = int(input())
 
