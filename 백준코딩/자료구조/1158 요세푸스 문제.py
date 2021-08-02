@@ -1,3 +1,4 @@
+#https://www.acmicpc.net/problem/1158
 n, k = map(int, input().split())
 now = k - 1
 answer = []
