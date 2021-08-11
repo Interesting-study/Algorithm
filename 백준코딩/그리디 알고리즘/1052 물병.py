@@ -14,5 +14,5 @@ while bin(n).count('1') > k:
     bottle = 2 ** (bin(n)[::-1].index("1"))
     answer += bottle
     n += bottle
-    
+
 print(answer)
