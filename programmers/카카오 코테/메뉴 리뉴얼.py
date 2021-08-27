@@ -1,31 +1,29 @@
 #https://programmers.co.kr/learn/courses/30/lessons/72411
+#combinations, counter 사용
+
 from itertools import combinations
+from collections import Counter
 
 def solution(orders, course):
     answer = []
-    orders_length = len(orders)
-    orders_index = list(range(orders_length))
-    course_menu = {}
-
     for c in course:
-        for comb in combinations(orders_index, c):
-            check = set(orders[comb[0]])
+        temp = []
+        # 코스 메뉴 갯수별 오더 조합 체크
+        for order in orders:
+            comb = combinations(sorted(order), c)
+            temp += comb
+        counter = Counter(temp)
 
-            for idx in comb[1:]:
-                now = set(orders[idx])
-                candidate = "".join(sorted(list(check.intersection(now))))
+        if len(counter) != 0 and max(counter.values()) != 1:
+            answer += ["".join(f) for f in counter if counter[f] == max(counter.values())]
 
-            if candidate not in course_menu.keys() and len(candidate) >= 2:
-                course_menu[candidate] = 0
+    return sorted(answer)
 
-    for o in orders:
-        for key in course_menu.keys():
-            if key in o:
-                course_menu[key] += 1
 
-    print(course_menu)
 
 print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"], [2,3,4]))
+#print(solution(["ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"], [2,3,5]))
+#print(solution(["XYZ", "XWY", "WXA"], [2, 3, 4]))
 
 """
             if len(candidate) < 2:
