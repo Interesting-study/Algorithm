@@ -1,3 +1,4 @@
+#https://programmers.co.kr/learn/courses/30/lessons/17682
 import re
 
 def solution(dartResult):
@@ -9,7 +10,7 @@ def solution(dartResult):
 
     for i in range(len(dart)):
         #처음으로 나온 스타상이 아닐때
-        if dart[i][2] == "*"  and i > 0:
+        if dart[i][2] == "*" and i > 0:
             dart[i-1] *= 2
         dart[i] = int(dart[i][0]) ** bonus[dart[i][1]] * option[dart[i][2]]
 
