@@ -1,4 +1,4 @@
-# https://programmers.co.kr/learn/courses/30/lessons/81302
+#https://programmers.co.kr/learn/courses/30/lessons/81302
 from collections import deque
 
 dx = [-1, 1, 0, 0]
