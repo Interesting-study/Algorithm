@@ -18,3 +18,21 @@
   * 뒤에서부터 생각할 수 있는가?
   * 순서를 강제할 수 있는가?
   * 특정 형태의 답만 고려할 수 있는가?
+
+
+<br>
+
+* 약수 구하기(효율적)
+~~~ 
+def get_divisor(n):
+    divisors = []
+    divisore_reverse = []
+
+    for i in range(1, int(n**0.5) + 1):
+        if n % i == 0:
+            divisors.append(i)
+            if (i != (n // i)):
+                divisore_reverse.append(n // i)
+
+    return divisors + divisore_reverse[::-1]
+~~~
