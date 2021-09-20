@@ -1,4 +1,4 @@
-#https://wwcvw.acmicpc.net/problem/1654
+#https://www.acmicpc.net/problem/1654
 
 k, n = map(int, input().split())
 lans = [int(input()) for _ in range(k)]
