@@ -30,27 +30,3 @@ print(answer)
 
 
 
-"""
-def get_score(members):
-    score = 0
-    mem_permu = permutations(members, 2)
-
-    for i, j in mem_permu:
-        score += ability[i][j]
-
-    return score
-    
-    
-0 0
-0 1
-0 4
-1 0
-1 1
-1 4
-4 0
-4 1
-4 4
-"""
-
-
-
