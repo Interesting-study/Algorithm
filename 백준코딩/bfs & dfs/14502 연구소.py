@@ -1,5 +1,4 @@
 #https://www.acmicpc.net/problem/14502
-import copy
 from itertools import combinations
 import copy
 from collections import deque
@@ -15,34 +14,20 @@ virus = []
 
 def bfs():
     q = deque(virus)
-    visited = [[0] * m for _ in range(n)]
+    visited = [[False] * m for _ in range(n)]
 
     while q:
-        row, col = q.popleft()
+        x, y = q.popleft()
 
-        # 상
-        if row - 1 >= 0 and last_maps[row - 1][col] == 0 and visited[row - 1][col] == 0:
-            visited[row - 1][col] = 1
-            last_maps[row - 1][col] = 2
-            q.append([row - 1, col])
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
 
-        # 하
-        if row + 1 < n and last_maps[row + 1][col] == 0 and visited[row + 1][col] == 0:
-            visited[row + 1][col] = 1
-            last_maps[row + 1][col] = 2
-            q.append([row + 1, col])
-
-        # 좌
-        if col - 1 >= 0 and last_maps[row][col - 1] == 0 and visited[row][col - 1] == 0:
-            visited[row][col - 1] = 1
-            last_maps[row][col - 1] = 2
-            q.append([row, col - 1])
-
-        # 우
-        if col + 1 < m and last_maps[row][col + 1] == 0 and visited[row][col + 1] == 0:
-            visited[row][col + 1] = 1
-            last_maps[row][col + 1] = 2
-            q.append([row, col + 1])
+            if nx >= 0 and nx < n and ny >= 0 and ny < m:
+                if last_maps[nx][ny] == 0:
+                    last_maps[nx][ny] = 2
+                    q.append((nx, ny))
+                    visited[nx][ny] = True
 
 
 for i in range(n):
@@ -52,14 +37,14 @@ for i in range(n):
         elif maps[i][j] == 2:
             virus.append((i, j))
 
-walls_comb = (combinations(walls, 3))
+walls_comb = list(combinations(walls, 3))
 min_area = -1
 
-for comb in walls_comb:
+for idx in range(len(walls_comb)):
     last_maps = copy.deepcopy(maps)
 
     for i in range(3):
-        last_maps[comb[0]][comb[1]] = 1
+        last_maps[walls_comb[idx][i][0]][walls_comb[idx][i][1]] = 1
 
     bfs()
 
