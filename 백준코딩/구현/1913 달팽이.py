@@ -8,7 +8,7 @@ depth = width = n // 2
 table = [[0] * n for _ in range(n)]
 table[width][depth] = now
 
-dx = [0, 1, 0, -1] #오른쪽 아래 왼쪽 위쪽
+dx = [0, 1, 0, -1] #오른
 dy = [1, 0, -1, 0]
 
 next_to = 0
@@ -28,6 +28,8 @@ while width >= 0 and depth >= 0:
     width -= 1
     depth -= 1
     next_to += 2
+
+print("\n\n")
 
 for tb in table:
     print(*tb)
