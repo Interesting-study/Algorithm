@@ -16,11 +16,12 @@ while left <= right:
     lack = False
 
     for p in plans:
+        print(wallet, p, mid)
         #돈을 뽑아도 하루를 못 넘길 떄
         if mid - p < 0:
             lack = True
             break
-        #하루는 살 수 있을 때
+        #일단 출금
         elif wallet - p < 0:
             wallet = mid
             cnt += 1
