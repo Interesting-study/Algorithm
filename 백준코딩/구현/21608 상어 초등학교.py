@@ -17,7 +17,7 @@ def check(j,k):
             else:
                 empty += 1
 
-    return near_list,empty
+    return near_list, empty
 
 def find_seat(l):
     l = sorted(l, key=lambda x:(x[0], x[1], x[2], x[3]))
@@ -44,6 +44,7 @@ for i in student.keys():
                 continue
             #i학생이 j,k에 앉았을때 인접한 친구들과 인접한 빈칸의 수
             near_list, emp = check(j,k)
+            print(near_list, emp)
 
             for like in student[i]:
                 if like in near_list:
