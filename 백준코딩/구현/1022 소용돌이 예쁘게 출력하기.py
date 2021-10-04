@@ -4,23 +4,40 @@ r1, c1, r2, c2 = map(int, input().split())
 width = c2 - c1 + 1
 height = r2 - r1 + 1
 
-dx = [0, -1, 1,]
-dy = [1, 1, 0, ]
+dx = [1, 0, -1, 0]
+dy = [0, -1, 0, 1]
 
 swirl = [[0] * width for _ in range(height)]
+number_of_board = width * height
 
-print(swirl)
+x = y = 0
+num = 1
+cnt = 0
+dir_cnt = 1
+dir = 0
 
-"""
-r이 위아래, c가 왼오
+while number_of_board > 0:
+    if r1 <= y <= r2 and c1 <= x <= c2:
+        number_of_board -= 1
+        swirl[y - r1][x - c1] = num
+        max_num = num
 
- -3 -2 -1  0  1  2  3
-    --------------------
--3 |37 36 35 34 33 32 31
--2 |38 17 16 15 14 13 30
--1 |39 18  5  4  3 12 29
- 0 |40 19  6  1  2 11 28
- 1 |41 20  7  8  9 10 27
- 2 |42 21 22 23 24 25 26
- 3 |43 44 45 46 47 48 49
-"""
+    num += 1
+    cnt += 1
+
+    y += dy[dir]
+    x += dx[dir]
+
+    if cnt == dir_cnt:
+        cnt = 0
+        dir = (dir + 1) % 4
+
+        #다음이 오른쪽이나 왼쪽으로 꺾을때마다 들어가야할 숫자가 하나씩 늘어난다
+        if dir == 0 or dir == 2:
+            dir_cnt += 1
+
+max_num_len = len(str(max_num))
+for i in range(height):
+    for j in range(width):
+        print(str(swirl[i][j]).rjust(max_num_len), end=" ")
+    print()
