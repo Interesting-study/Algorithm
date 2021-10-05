@@ -12,28 +12,32 @@ class Game:
         for _ in range(n):
             room = input().split()
             self.rooms.append(list(room[0]) + list(map(int, room[1:-1])))
-
+        self.success = False
         self.visited = [False] * (n + 1)
 
     def dfs(self, node, cash):
-        now_room =
+        now_room = self.rooms[node]
+        now_pocket = actions[now_room[0]](cash, now_room[1])
 
-        if cash >= 0:
+        if now_pocket >= 0:
             if node == n:
-                success = True
-                return success
+                self.success = True
+                return 0
             else:
-                for next_room in rooms[node][2:]:
-                    if next_room != node and not visited[next_room]:
-                        visited[next_room] = True
-                        print(cash)
-                        print(node, rooms[node], cash, visited)
-                        dfs(next_room, cash, visited, success)
-                        visited[next_room] = False
-        visited[node] = False
+                for next_room in now_room[2:]:
+                    if next_room != now_room and not self.visited[next_room]:
+                        self.visited[next_room] = True
+                        self.dfs(next_room, now_pocket)
+                        self.visited[next_room] = False
+        self.visited[node] = False
 
-        def start(self):
-            self.dfs(1, cash=0)
+
+    def start(self):
+        self.dfs(1, cash=0)
+        if self.success:
+            return "Yes"
+        else:
+            return "No"
 
 
 
@@ -43,6 +47,7 @@ while True:
         break
 
     game = Game(n)
+    print(game.start())
 
 """
 4
