@@ -25,7 +25,7 @@ class Shark:
         self.size = 2
         self.start = start
         self.eating_fish = 0
-        self.help = False
+        self.call_mom = False
         self.seconds = 0
 
     def upgrade_size(self):
@@ -53,4 +53,7 @@ shark = Shark(start)
 if len(fishes[1]) == 0:
     print(shark.seconds)
 else:
-    pass
+    while not shark.call_mom:
+
+
+        
