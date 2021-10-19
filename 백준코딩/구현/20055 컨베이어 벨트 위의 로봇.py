@@ -9,7 +9,6 @@ stage = 0
 robot = [0] * n
 robot = deque(robot)
 
-
 while conveyor_belt.count(0) < k:
     conveyor_belt.rotate(1)
     robot.rotate(1)
