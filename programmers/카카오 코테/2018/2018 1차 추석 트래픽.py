@@ -1,5 +1,13 @@
 #https://programmers.co.kr/learn/courses/30/lessons/17676
 def solution(lines):
+    new_lines = []
+
+    for line in lines:
+        line_split = line.split()
+        new_lines.append(line_split[1] + line_split[2])
+
+
+    print(new_lines)
     answer = 0
     return answer
 
