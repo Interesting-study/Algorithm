@@ -8,6 +8,7 @@ def solution(str1, str2):
     new_str1 = [str1[i:i+2] for i in range(0, len(str1), 2)]
     new_str2 = [str2[i:i+2] for i in range(0, len(str2), 2)]
 
+    #합집합을 어케 구현할지
     print(new_str1, new_str2)
 
     return
