@@ -1,39 +1,38 @@
-#https://www.acmicpc.net/problem/14500
-import sys; input = sys.stdin.readline
+import sys
+N, M = map(int, sys.stdin.readline().split())
+arr = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
 
-def dfs(r, c, idx, total):
-    global ans
-    if ans >= total + max_val * (3 - idx):
+def DFS(depth, y, x, sumval):
+    global result
+    if sumval + (3 - depth) * maxval <= result:
         return
-    if idx == 3:
-        ans = max(ans, total)
+    if depth == 3:
+        result = max(result, sumval)
         return
     else:
         for i in range(4):
-            nr = r + dr[i]
-            nc = c + dc[i]
-            if 0 <= nr < N and 0 <= nc < M and visit[nr][nc] == 0:
-                if idx == 1:
-                    visit[nr][nc] = 1
-                    dfs(r, c, idx + 1, total + arr[nr][nc])
-                    visit[nr][nc] = 0
-                visit[nr][nc] = 1
-                dfs(nr, nc, idx + 1, total + arr[nr][nc])
-                visit[nr][nc] = 0
+            ny, nx = y + dy[i], x + dx[i]
+            if 0 > ny or N <= ny or 0 > nx or M <= nx or visited[ny][nx]:
+                continue
+            if depth == 1:
+                visited[ny][nx] = True
+                DFS(depth + 1, y, x, sumval + arr[ny][nx])
+                visited[ny][nx] = False
 
+            visited[ny][nx] = True
+            DFS(depth + 1, ny, nx, sumval + arr[ny][nx])
+            visited[ny][nx] = False
 
-N, M = map(int, input().split())
-arr = [list(map(int, input().split())) for _ in range(N)]
-visit = [([0] * M) for _ in range(N)]
-dr = [-1, 0, 1, 0]
-dc = [0, 1, 0, -1]
-ans = 0
-max_val = max(map(max, arr))
+result = 0
+maxval = max(map(max, arr))
+visited = [[False] * M for _ in range(N)]
 
-for r in range(N):
-    for c in range(M):
-        visit[r][c] = 1
-        dfs(r, c, 0, arr[r][c])
-        visit[r][c] = 0
+for i in range(N):
+    for j in range(M):
+        visited[i][j] = True
+        DFS(0, i, j, arr[i][j])
+        visited[i][j] = False
 
-print(ans)
+print(result)
