@@ -1,4 +1,5 @@
 #https://leetcode.com/problems/design-hashmap/
+import collections
 class ListNode:
     def __init__(self, key=None, value=None):
         self.key = key
