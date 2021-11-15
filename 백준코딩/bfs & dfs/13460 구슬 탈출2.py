@@ -1,76 +1,70 @@
 #https://www.acmicpc.net/problem/13460
 from collections import deque
-def find_red(board):
-    for i in range(n):
-        if 'R' in board[i]:
-            j = board[i].index('R')
-            break
-    return (i, j)
 
-def find_exit(board):
+def pos_init():
+    rx, ry, bx, by = 0, 0, 0, 0  # 초기화
     for i in range(n):
-        if 'O' in board[i]:
-            j = board[i].index('O')
-            break
-    return (i, j)
+        for j in range(m):
+            if board[i][j] == 'R':
+                rx, ry = i, j
+            elif board[i][j] == 'B':
+                bx, by = i, j
+    # 위치 정보와 depth(breadth 끝나면 +1)
+    q.append((rx, ry, bx, by, 1))
+    visited[rx][ry][bx][by] = True
 
-def bfs(start):
-    q = deque()
-    q.append(start)
+def move(x, y, dx, dy):
     cnt = 0
+    # 다음이 벽이거나 현재가 구멍일 때까지
+    while board[x+dx][y+dy] != '#' and board[x][y] != 'O':
+        x += dx
+        y += dy
+        cnt += 1
+
+    return x, y, cnt
+
+def bfs():
+    pos_init()
 
     while q:
-        x, y = q.popleft()
+        rx, ry, bx, by, depth = q.popleft()
 
-        print('좌표, x:{}, y:{}'.format(x, y))
+        if depth > 10:
+            break
 
         for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
+            nrx, nry, rcnt = move(rx, ry, dx[i], dy[i])  # Red
+            nbx, nby, bcnt = move(bx, by, dx[i], dy[i])  # Blue
 
-            if nx < 0 or ny < 0 or nx >= n or ny >= m:
-                continue
+            if board[nbx][nby] != 'O':
+                if board[nrx][nry] == 'O':
+                    print(depth)
+                    return
 
-            if board[nx][ny] == '#' or board[nx][ny] == "B":
-                continue
+                if nrx == nbx and nry == nby:
+                    if rcnt > bcnt:
+                        nrx -= dx[i]
+                        nry -= dy[i]
+                    else:
+                        nbx -= dx[i]
+                        nby -= dy[i]
 
-            if board[nx][ny] == "." and not visited[nx][ny]:
-                cnt += 1
+                if not visited[nrx][nry][nbx][nby]:
+                    visited[nrx][nry][nbx][nby] = True
+                    q.append((nrx, nry, nbx, nby, depth+1))
 
-                while board[nx][ny] == '.' or board[nx][ny] == 'O':
-                    print(nx, ny)
-                    visited[nx][ny] = True
-
-                    if board[nx][ny] == 'O':
-                        return '\n' + str(cnt) + '번'
-
-                    nx += dx[i]
-                    ny += dy[i]
-
-                print("방향 : ", i)
-                qx = nx - dx[i]
-                qy = ny - dy[i]
-                q.append((qx, qy))
-
-                print("\n---\n")
-                break
-
-
-        print(q)
-
-
-
-
+    print(-1)
 
 n, m = map(int, input().split())
 board = [list(input()) for _ in range(n)]
-visited = [[False] * m for _ in range(n)]
+visited = [[[[False] * m for _ in range(n)] for _ in range(m)] for _ in range(n)]
 
 #상하좌우
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-red, ex = find_red(board), find_exit(board)
-print(bfs(red))
+q = deque()
+
+bfs()
 
 
