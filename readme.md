@@ -36,3 +36,19 @@ def get_divisor(n):
 
     return divisors + divisore_reverse[::-1]
 ~~~
+
+
+
+<br>
+
+* n진수 구하기(재귀함수)
+~~~
+def convert(n, base):
+    base_str = '0123456789ABCDEF'
+    q, r = divmod(n, base)
+
+    if q == 0:
+        return base_str[r]
+    else:
+        return convert(q, base) + base_str[r]
+~~~
