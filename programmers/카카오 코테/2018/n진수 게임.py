@@ -1,14 +1,23 @@
 #https://programmers.co.kr/learn/courses/30/lessons/17687?language=python3
-import string
+def convert(n, base):
+    base_str = '0123456789ABCDEF'
+    q, r = divmod(n, base)
+
+    if q == 0:
+        return base_str[r]
+    else:
+        return convert(q, base) + base_str[r]
+
+
 def solution(n, t, m, p):
-    num_in_dict = {i:i for i in range(10)}
-
-    for i in range(10, 17):
-        num_in_dict[i] = string.ascii_uppercase[i-10]
-
-    print(num_in_dict)
-
+    needed_num = ''
     answer = ''
+
+    for i in range(m*t):
+        needed_num += convert(i, n)
+
+    answer = needed_num[p-1:m*t:m]
+
     return answer
 
 print(solution(2, 4, 2, 1))
