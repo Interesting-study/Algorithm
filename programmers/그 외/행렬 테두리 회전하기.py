@@ -1,30 +1,43 @@
 #https://programmers.co.kr/learn/courses/30/lessons/77485
-from collections import defaultdict
-def get_border(coord, columns):
-    x1, y1, x2, y2 = coord[0], coord[1], coord[2], coord[3]
-    border = {}
-
-    for i in range(x1, x2+1):
-        for j in range(y1, y2+1):
-            if x1 < i < x2 and y1 < j < y2:
-                #print(i, j)
-                continue
-            num = (i - 1) * columns + j
-            border[num] = [i, j]
-
-    return border
-
-def rotate(border):
-    pass
 
 def solution(rows, columns, queries):
     answer = []
-    board = defaultdict(int)
+    board = [[i*columns + (j+1) for j in range(columns)] for i in range(rows)]
 
-    for query in queries:
-        border = get_border(query, columns)
-        print(border)
+    for x1, y1, x2, y2 in queries:
+        store = board[x1-1][y1-1]
+        min_value = store
+
+        for k in range(x1-1, x2-1):
+            next = board[k+1][y1-1]
+            board[k][y1-1] = next
+            min_value = min(min_value, next)
+
+        for k in range(y1-1, y2-1):
+            next = board[x2-1][k+1]
+            board[x2-1][k] = next
+            min_value = min(min_value, next)
+
+        for k in range(x2-1, x1-1, -1):
+            next = board[k-1][y2-1]
+            board[k][y2-1] = next
+            min_value = min(min_value, next)
+
+        for k in range(y2-1, y1-1, -1):
+            next = board[x1-1][k-1]
+            board[x1-1][k] = next
+            min_value = min(min_value, next)
+
+        board[x1-1][y1] = store
+        answer.append(min_value)
 
     return answer
 
 print(solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]]))
+
+'''
+rows	columns	queries	result
+6	6	[[2,2,5,4],[3,3,6,6],[5,1,6,3]]	[8, 10, 25]
+3	3	[[1,1,2,2],[1,2,2,3],[2,1,3,2],[2,2,3,3]]	[1, 1, 5, 3]
+100	97	[[1,1,100,97]]	[1]
+'''
