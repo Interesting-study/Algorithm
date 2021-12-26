@@ -10,6 +10,7 @@ def calc(op, seq, exp):
             temp = []
             print(split_exp)
             for s in split_exp:
+                print(s)
                 temp.append(calc(op, seq+1, s))
             print(temp)
             print('-------------\n\n')
@@ -33,7 +34,6 @@ def calc(op, seq, exp):
             print(temp)
             print('-------------\n\n')
             return str(eval("-".join(temp)))
-
 
 def solution(expression):
     answer = 0
