@@ -1,4 +1,7 @@
 #https://www.acmicpc.net/problem/11725
+import sys
+sys.setrecursionlimit(10**9)
+
 n = int(input())
 tree = [[] for _ in range(n+1)]
 graph = [0 for _ in range(n+1)]
