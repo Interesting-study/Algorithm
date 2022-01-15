@@ -1,6 +1,7 @@
 #https://www.acmicpc.net/problem/7662
 from collections import defaultdict
-import heapq
+import heapq, sys
+input = sys.stdin.readline
 
 def sync(q):
     while q and not sync_data[q[0][1]]:
