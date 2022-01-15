@@ -43,15 +43,3 @@ for _ in range(T):
         print(-max_heap[0][0], min_heap[0][0])
     else:
         print("EMPTY")
-
-'''
-1
-7
-I 16
-I -5643
-D -1
-D 1
-D 1
-I 123
-D -1
-'''
