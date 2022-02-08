@@ -20,7 +20,6 @@ def compress(x, y, n):
 
     answer.append(str(now))
 
-
 compress(0, 0, n)
 print(''.join(answer))
 '''
