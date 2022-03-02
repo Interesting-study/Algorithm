@@ -8,11 +8,8 @@ for _ in range(T):
     n = int(input())
     nums = deque(input()[1:-1].split(','))
 
-    start, end = 0, len(nums)
-
     if n == 0:
         nums = deque()
-        start, end = 0, 0
 
     is_reverse = False
 
