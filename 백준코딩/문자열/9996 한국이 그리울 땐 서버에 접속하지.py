@@ -1,4 +1,4 @@
-#https://www.acmicpc.net/problem/9996
+#유
 import re
 
 n = int(input())
