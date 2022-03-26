@@ -14,9 +14,8 @@ for p in permutations(calc, k):
     for r, c, s in p:
         r -= 1
         c -= 1
-
+        print(r, c, s)
         for i in range(s, 0, -1):
-
             tmp = copy_arr[r-i][c+i]
             copy_arr[r-i][c-i+1:c+i+1] = copy_arr[r-i][c-i:c+i]
 
