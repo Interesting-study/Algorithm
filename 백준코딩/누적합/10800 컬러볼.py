@@ -19,11 +19,3 @@ for i in range(n):
 
 for i in range(n):
     print(answer[i])
-
-'''
-4
-1 10
-3 15
-1 3
-4 8
-'''
