@@ -49,7 +49,7 @@ while True:
             if arr[i][j] < 0:
                 arr[i][j] = 0
 
-    if result == 0:
+    if result == 0:#다 바다가 되어도 분리가 되지 않는 경우
         break
 
     if result >= 2:
