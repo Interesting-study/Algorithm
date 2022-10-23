@@ -1,17 +1,25 @@
 import requests
 import json
 
-year = 2011
-competition = "UEFA Champions League"
+def clean_data():
+  r = requests.get('https://coderbyte.com/api/challenges/json/json-cleaning')
+  removable_value = set(('N/A', '', '-'))
+  r = r.json()
+  answer = {}
 
-URL = "https://jsonmock.hackerrank.com/api/football_competitions"
-match_URL = "https://jsonmock.hackerrank.com/api/football_matches"
+  for key, value in r.items():
+    if type(value) is dict:
+      temp = {}
+      for k, v in value.items():
+        if v not in removable_value:
+          temp[k] = v
+      answer[key] = temp
+    elif type(value) is list:
+      answer[key] = [v for v in value if v not in removable_value]
+    else:
+      if value not in removable_value:
+        answer[key] = value
 
-params = {
-    'name': competition,
-    'year': str(year)
-}
-response = requests.get(url=URL, params=params).json()
-winner = response.get('data')[0]['winner']
+  return answer
 
-print(winner)
+print(clean_data())
