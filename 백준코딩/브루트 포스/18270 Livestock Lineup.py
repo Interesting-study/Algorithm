@@ -1,12 +1,14 @@
 from itertools import*
-t='Bessie Buttercup Belinda Beatrice Bella Blue Betsy Sue'.split()
-t.sort()
-l=[]
+cows = 'Bessie Buttercup Belinda Beatrice Bella Blue Betsy Sue'.split()
+cows.sort()
+order = []
+
 for T in range(int(input())):
-    a,*_,b=input().split();l+=[(a,b)]
+#    a, b= input().split("must be milked beside ")
+    a, *_, b = input().split()
+    order.append((a, b))
 
-for i in permutations(t):
-
-    if all(abs(i.index(v)-i.index(w))==1 for v,w in l):
+for i in permutations(cows):
+    if all(abs(i.index(v) - i.index(w)) == 1 for v, w in order):
         print(*i)
         break
