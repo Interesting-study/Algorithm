@@ -1,13 +1,17 @@
-N = int(input())
-dp = [0,1]
+#다이나믹 프로그래밍
 
-for i in range(2, N+1):
-    min_value = 1e9
-    j = 1
+from math import sqrt
 
-    while (j**2) <= i:
-        min_value = min(min_value, dp[i - (j**2)])
-        j += 1
+n = int(input())
+dp = [0] * (n+1) # 인덱스가 어떤 특정한 숫자고, dp[5] -> 5가 되기 위해 필요한 제곱수의 갯수를 의미한다.
+dp[1] = 1
 
-    dp.append(min_value + 1)
-print(dp[N])
+for i in range(2, n+1):
+    min_value = float("inf")
+
+    for j in range(1, int(sqrt(i)) + 1):
+        min_value = min(min_value, dp[i - j **2])
+
+    dp[i] = min_value + 1
+
+print(dp[n])
