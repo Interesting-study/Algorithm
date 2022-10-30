@@ -1,18 +1,12 @@
-import sys
-
-n=int(sys.stdin.readline().strip())
-a=[]
-s=0
-
-for i in range(n):
-    a.append(int(sys.stdin.readline().strip()))
-
-a.sort(reverse=True)
+n= int(input())
+tips = [int(input()) for _ in range(n)]
+tips.sort(reverse=True)
+answer = 0
 
 for i in range(n):
-    b=a[i] - i
+    tip = tips[i] - i
 
-    if b > 0:
-        s += b
+    if tip > 0:
+        answer += tip
 
-print(s)
+print(answer)
