@@ -2,8 +2,6 @@ N, M = map(int, input().split())
 original = []
 count = []
 
-for _ in range(N):
-    original.append(input())
 
 for a in range(N-7):
     for b in range(M-7):

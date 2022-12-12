@@ -1,5 +1,4 @@
 #https://www.acmicpc.net/problem/2003
-from itertools import permutations
 
 n, m = map(int, input().split())
 nums = list(map(int, input().split()))
